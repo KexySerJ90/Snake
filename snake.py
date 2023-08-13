@@ -15,11 +15,16 @@ class Snake:
     def create_snake(self):
         # создаем сегменты змеи и добавляем их в список
         for pos in STARTING_POS:
-            segment = Turtle('square')
-            segment.color('white')
-            segment.penup()
-            segment.goto(pos)
-            self.segments.append(segment)
+            self.add_seg(pos)
+
+    def add_seg(self,pos):
+        segment = Turtle('square')
+        segment.color('white')
+        segment.penup()
+        segment.goto(pos)
+        self.segments.append(segment)
+    def extend(self):
+        self.add_seg(self.segments[-1].position())
 
     def move(self):
 
@@ -33,6 +38,9 @@ class Snake:
 
         # двигаем голову змеи вперед на 20 пикселей
         self.head.forward(MOVE_DIST)
+
+
+
 
     def up(self):
         # Проверка текущего направления головы змеи

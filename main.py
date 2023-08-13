@@ -28,15 +28,22 @@ game_is_on = True
 while game_is_on:
     # обновляем экран и задерживаем выполнение на 0.2 секунды
     screen.update()
-    time.sleep(0.2)
+    if len(snake.segments)>8:
+        time.sleep(0.1)
+    else:
+        time.sleep(0.2)
     snake.move()
     if snake.head.distance(food)<15:
         food.refresh()
+        snake.extend()
         scoreboard.win()
     if snake.head.xcor()>290 or snake.head.xcor()<-290 or snake.head.ycor()>290 or snake.head.xcor()<-290:
         game_is_on=False
         scoreboard.game_over()
-
+    for seg in snake.segments[1:]:
+        if snake.head.distance(seg)<10:
+            game_is_on=False
+            scoreboard.game_over()
 
 
 # закрываем экран при клике мыши
