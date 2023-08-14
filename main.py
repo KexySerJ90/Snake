@@ -40,10 +40,12 @@ while game_is_on:
     #Если змея выходит за границы поля или сталкивается с каким-то из своих сегментов, то завершить игру и вывести сообщение о конце игры.
     if snake.head.xcor()>290 or snake.head.xcor()<-290 or snake.head.ycor()>290 or snake.head.xcor()<-290:
         scoreboard.reset()
+        snake.reset()
 
     for seg in snake.segments[1:]:
         if snake.head.distance(seg)<10:
             scoreboard.reset()
+            snake.reset()
 
 
 # закрываем экран при клике мыши
