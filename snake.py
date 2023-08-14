@@ -1,28 +1,32 @@
 from turtle import Turtle
+
 STARTING_POS = [(0, 0), (-20, 0), (-40, 0)]
-MOVE_DIST=20
-UP=90
-DOWN=-90
-LEFT=180
-RIGHT=0
+MOVE_DIST = 20
+UP = 90
+DOWN = -90
+LEFT = 180
+RIGHT = 0
+
+
 class Snake:
     def __init__(self):
         # создаем список начальных позиций для сегментов змеи
         self.segments = []
         self.create_snake()
-        self.head=self.segments[0]
+        self.head = self.segments[0]
 
     def create_snake(self):
         # создаем сегменты змеи и добавляем их в список
         for pos in STARTING_POS:
             self.add_seg(pos)
 
-    def add_seg(self,pos):
+    def add_seg(self, pos):
         segment = Turtle('square')
         segment.color('white')
         segment.penup()
         segment.goto(pos)
         self.segments.append(segment)
+
     def extend(self):
         self.add_seg(self.segments[-1].position())
 
@@ -39,17 +43,14 @@ class Snake:
         # двигаем голову змеи вперед на 20 пикселей
         self.head.forward(MOVE_DIST)
 
-
-
-
     def up(self):
         # Проверка текущего направления головы змеи
-        if self.head.heading()!=DOWN:
+        if self.head.heading() != DOWN:
             self.head.setheading(UP)
 
     def down(self):
         if self.head.heading() != UP:
-         self.head.setheading(DOWN)
+            self.head.setheading(DOWN)
 
     def left(self):
         if self.head.heading() != RIGHT:
@@ -58,3 +59,7 @@ class Snake:
     def right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
+    def reset(self):
+        self.segments.clear()
+        self.create_snake()

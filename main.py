@@ -26,7 +26,7 @@ screen.onkey(snake.right,'Right')
 # запускаем игру
 game_is_on = True
 while game_is_on:
-    # обновляем экран и задерживаем выполнение на 0.2 секунды
+    # обновляем экран
     screen.update()
     if len(snake.segments)>8:
         time.sleep(0.1)
@@ -37,13 +37,13 @@ while game_is_on:
         food.refresh()
         snake.extend()
         scoreboard.win()
+    #Если змея выходит за границы поля или сталкивается с каким-то из своих сегментов, то завершить игру и вывести сообщение о конце игры.
     if snake.head.xcor()>290 or snake.head.xcor()<-290 or snake.head.ycor()>290 or snake.head.xcor()<-290:
-        game_is_on=False
-        scoreboard.game_over()
+        scoreboard.reset()
+
     for seg in snake.segments[1:]:
         if snake.head.distance(seg)<10:
-            game_is_on=False
-            scoreboard.game_over()
+            scoreboard.reset()
 
 
 # закрываем экран при клике мыши
